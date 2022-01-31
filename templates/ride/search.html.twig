@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Recherche de trajet
+{% endblock %}
+
+{% block body %}
+	<h1>Ou voulez vous aller ?</h1>
+
+	{{ form_start(formView) }}
+	{{ form_errors(formView) }}
+	{{ form_widget(formView) }}
+
+	<button type="submit">
+		<i class="fas fa-save"></i>
+        Enregistrer
+	</button>
+
+	{{ form_end(formView) }}
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    {{ app.user.name }}
+{% endblock %}
+
+{% block body %}
+    <h1>Bienvenue sur votre compte</h1>
+    {{ form_start(formView) }}
+    {{ form_errors(formView) }}
+    {{ form_widget(formView) }}
+    {{ form_end(formView) }}
+    <div class="container">
+        <section>
+            <h2>Information personnel</h2>
+            <div>
+                <p>{{ app.user.name }}</p>
+            </div>
+            <div>
+                <p>{{ app.user.surname }}</p>
+            </div>
+            <div>
+                <p>{{ app.user.email }}</p>
+            </div>
+            <div>
+                <p>{{ app.user.phoneNumber }}</p>
+            </div>
+        </section>
+        <section></section>
+        <section></section>
+        <section></section>
+    </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{% if rides|length > 0 %}
+		{{rides[0].startingPlace}}
+		-
+		{{rides[0].endingPlace}}
+	{% else %}
+		Aucun Trajet
+	{% endif %}
+{% endblock %}
+
+{% block body %}
+	<h1>Vos trajet:</h1>
+
+	{% if rides|length > 0 %}
+		{% for ride in rides %}
+			<div class="card">
+				<p>User {{ ride.user.name }}</p>
+				<p>Départ:
+					{{ ride.startingPlace }}
+					à:
+					{{ ride.startingTime|date('H:i') }}</p>
+				<p>Arrivée:
+					{{ ride.endingPlace }}
+					à:
+					{{ ride.endingTime|date('H:i') }}</p>
+			</div>
+		{% endfor %}
+	{% else %}
+		<p>Aucun trajet trouvé</p>
+	{% endif %}
+{% endblock %}
