@@ -1,0 +1,86 @@
+:root{
+    --footer-height: 50px;
+    --header-height: 65px;
+}
+
+/*---------------Header-------------------*/
+header{
+    height: var(--header-height);
+    background-color: var(--c-p-1);
+    color: var(--c-w-4);
+
+}
+header .log{
+    height: inherit;
+    margin: 0 10px 0 auto;
+}
+header .lien-user{
+    position: relative;
+}
+header .fa-user{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+header .log i{
+    font-size: 20px;
+    transition: 0.2s;
+}
+header .log i:hover{
+    transition: 0.2s;
+    font-size: 25px;
+}
+header .icon-container{
+    margin: 0 20px;
+    height: inherit;
+}
+header .icon-container h1{
+    font-family: 'Supermercado One', cursive;
+    color: var(--c-s-1);
+    margin:0;
+}
+header nav{
+    height: inherit;
+    margin: 0 auto;
+}
+header ul{
+    height: inherit;
+    margin: 0;
+    padding: 0;
+}
+header a{
+    color: var(--c-w-4);
+    margin: 0 10px;
+}
+header span{
+    color: var(--c-w-2);
+    margin: 0 10px;
+}
+
+
+
+/*------------Footer----------------------*/
+footer{
+    height: var(--footer-height);
+    background-color: var(--c-p-1);
+    padding: 10px;
+}
+
+/*----------Media Query-------------*/
+@media (max-width: 800px) {
+    header p{
+        display: none;
+    }
+    header h1{
+        font-size: 1.1em;
+    }
+    header .icon-container{
+        margin: 0 5px;
+    }
+}
+@media (max-width: 800px) {
+    header{
+        font-size: 0.9em;
+    }
+}

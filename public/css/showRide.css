@@ -1,0 +1,74 @@
+.h1{
+    margin: 10px 0;
+    padding: 15px 0 15px 30px;
+    background-color: var(--c-p-2);
+    color: var(--c-w-2);
+    font-size: 1.3em;
+}
+.h1 span{
+    margin-left: 10px;
+    color: var(--c-s-1);
+    font-weight: 600;
+}
+.ride-card{
+    padding: 40px;
+    box-shadow: 5px 5px 10px var(--c-p-2);
+    border-radius: 10px;
+    margin: 15px 0;
+    background-image: radial-gradient(var(--c-s-3), var(--c-p-2));
+}
+h2 span{
+    font-family: var(--font-4);
+    color: var(--c-w-2);
+}
+h2 i{
+    margin: 0 20px;
+    color: var(--c-b-4);
+}
+.line{
+    width: 50%;
+    margin: 20px auto 40px auto;
+    height: 2px;
+    background-color: var(--c-w-2);
+}
+h3{
+    color:var(--c-w-2);
+    font-weight: 400;
+    font-size: 1.4em;
+}
+h4{
+    color: var(--c-b-3);
+}
+h5{
+    font-family: var(--font-3);
+    color:var(--c-w-1);
+}
+h6{
+    font-family: var(--font-4);
+    color:var(--c-b-4);
+}
+.trajet-container{
+    gap: 20px;
+}
+.horaire-container{
+    display: grid;
+    grid-template-columns: 2fr 3fr 1fr 2fr;
+    width: fit-content;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.horaire-container h4{
+    text-align: center;
+}
+.fa-check-circle{
+    font-size: 1.1em;
+    color: var(--c-g);
+    margin-right: 10px;
+}
+.fa-times-circle{
+    font-size: 1.1em;
+    color: var(--c-r);
+    margin-right: 10px;
+}
+
+

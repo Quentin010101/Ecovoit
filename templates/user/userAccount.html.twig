@@ -1,33 +1,194 @@
 {% extends "base.html.twig" %}
 
+
 {% block title %}
-    {{ app.user.name }}
+	{% if app.user %}
+		{{ app.user.name }}
+	{% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset("css/account.css") }}">
+{% endblock %}
+{% block javascripts %}
+	<script src="{{ asset("js/navigation-account.js") }}"></script>
 {% endblock %}
 
 {% block body %}
-    <h1>Bienvenue sur votre compte</h1>
-    {{ form_start(formView) }}
-    {{ form_errors(formView) }}
-    {{ form_widget(formView) }}
-    {{ form_end(formView) }}
-    <div class="container">
-        <section>
-            <h2>Information personnel</h2>
-            <div>
-                <p>{{ app.user.name }}</p>
-            </div>
-            <div>
-                <p>{{ app.user.surname }}</p>
-            </div>
-            <div>
-                <p>{{ app.user.email }}</p>
-            </div>
-            <div>
-                <p>{{ app.user.phoneNumber }}</p>
-            </div>
-        </section>
-        <section></section>
-        <section></section>
-        <section></section>
-    </div>
-{% endblock %}
+	<div class="wrapper">
+		<h1 class="h1">Bienvenue sur votre compte</h1>
+		<div class="p-row">
+			<div class="navigation">
+				<div class="p-column p-align-center navigation-header">
+					<div class="avatar-container p-center">
+						<img src="{{ asset("asset/avatar/" ~ app.user.preference.avatar) }}" alt="avatar">
+					</div>
+					<h2>Utilisateur depuis le:</h2>
+					<h3>{{ app.user.date|date('d/m/Y') }}</h3>
+				</div>
+				<div class="p-column">
+					<button id="button-info" class="button3 button3-show">
+						<i class="fas fa-user"></i>
+						<span>Information Personnel</span>
+					</button>
+					<button id="button-pref" class="button3">
+						<i class="fas fa-palette"></i>
+						<span>Préférence</span>
+					</button>
+					<button id="button-trajet" class="button3">
+						<i class="fas fa-car"></i>
+						<span>Trajet</span>
+					</button>
+					<button id="button-message" class="button3">
+						<i class="fas fa-envelope"></i>
+						<span>Message</span>
+					</button>
+				</div>
+			</div>
+			<div class="p-container">
+				<section id="section-info" class="show-section">
+					<h2>-Information personnel-</h2>
+					<h3>Mettez à jour vos information:</h3>
+					{{ form_start(formView) }}
+					{{ form_widget(formView) }}
+					{{ form_errors(formView) }}
+					{{ form_end(formView) }}
+
+				</section>
+				<section id="section-pref" class="hide-section">
+					<h2>-Préférence-</h2>
+					<h3>Mettez à jour vos préférence:</h3>
+
+					{{ form_start(formPreferenceView) }}
+					{{ form_widget(formPreferenceView) }}
+					{{ form_errors(formPreferenceView) }}
+					{{ form_end(formPreferenceView) }}
+				</section>
+				<section id="section-trajet" class="hide-section">
+					<h2>-Trajet-</h2>
+					<div>
+						<h3>Trajet à venir en tant que conducteur:</h3>
+						{% for ride in rideAsDriver %}
+							<div>
+							<hr>
+								<h4>Le
+									{{ ride.tripDate|date('d/m/Y') }}</h4>
+								<p>Départ:
+									{{ ride.startingPlace }}
+									à
+									{{ ride.startingTime|date('H:i') }}</p>
+								<p>Arrivé:
+									{{ ride.endingPlace }}
+									à
+									{{ ride.endingTime|date('H:i') }}</p>
+								<p>
+									{{ ride.tripDistance }}km
+									<i class="fas fa-arrow-right"></i>
+									{{ (ride.tripDuration) }}min
+								</p>
+							</div>
+						{% endfor %}
+					</div>
+					<div>
+						<h3>Trajet à venir en tant que passager:</h3>
+						{% for ride in rideAsPassenger %}
+							<div>
+								<hr>
+								<h4>Le
+									{{ ride[0].tripDate|date('d/m/Y') }}</h4>
+								<p>Départ:
+									{{ ride[0].startingPlace }}
+									à
+									{{ ride[0].startingTime|date('H:i') }}</p>
+								<p>Arrivé:
+									{{ ride[0].endingPlace }}
+									à
+									{{ ride[0].endingTime|date('H:i') }}</p>
+								<p>
+									{{ (ride[0].tripDistance)/1000 }}km
+									<i class="fas fa-arrow-right"></i>
+									{{ (ride[0].tripDuration) }}min
+								</p>
+							</div>
+						{% endfor %}
+					</div>
+				</section>
+				<section id="section-message" class="hide-section">
+					<h2>-Messagerie-</h2>
+					<div>
+						<h3>Message envoyé:</h3>
+						<hr>
+						{% if messagesSent|length > 0 %}
+							{% for m in messagesSent %}
+								{% if m.messageSenderDelete == 0 %}
+									<div class="line"></div>
+									<div class="message-container">
+										<h4 class="p-row">Le
+											{{ m.messageDate|date('d/m/Y') }}
+										</h4>
+										<div class="p-row p-align-center img-cont">
+											<div class="avatar-container p-center">
+												<img src="{{ asset("asset/avatar/" ~ m.userReciever.preference.avatar) }}" alt="avatar">
+											</div>
+											<div>
+												<h4>{{ m.userReciever.name }}</h4>
+												<p>{{ m.messageContent }}</p>
+
+											</div>
+										</div>
+										<div class="button-container">
+											<a class="button1" href="{{ path('message_delete_asSender', {'id': m.id }) }}">Supprimer ce message</a>
+										</div>
+									</div>
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							<p>Aucun message</p>
+						{% endif %}
+					</div>
+					<div>
+						<h3>Message reçu:</h3>
+						<hr>
+						{% if messagesRecieve|length > 0 %}
+							{% for m in messagesRecieve %}
+								{% if m.messageRecieverDelete == 0 %}
+									<hr>
+									<div class="message-container">
+										<h4>Le
+											{{ m.messageDate|date('d/m/Y') }}
+										</h4>
+										<div class="p-row p-align-center img-cont">
+
+											<div class="avatar-container p-center">
+												<img src="{{ asset("asset/avatar/" ~ m.userSender.preference.avatar) }}" alt="avatar">
+											</div>
+											<div>
+												<span>{{ m.userSender.name }}</span>
+												<p>{{ m.messageContent }}</p>
+											</div>
+										</div>
+										<div class="button-container">
+											<a class="button1" href="{{ path('message_delete_asReciever', {'id': m.id }) }}">Supprimer ce message</a>
+										</div>
+										{% if m.messageReport == 0 %}
+											<div class="button-container">
+												<a class="button1" href="{{ path('message_report', {'id': m.id }) }}">Signaler ce message</a>
+											</div>
+										{% endif %}
+									{% if m.messageReport == 1  %}
+										<h5>
+											<i class="fas fa-check"></i>
+											Message Reporté
+										</h5>
+									{% endif %}
+								</div>
+							{% endif %}
+						{% endfor %}
+					{% else %}
+						<p>Aucun message</p>
+					{% endif %}
+				</div>
+			</section>
+		</div>
+	</div>
+</div>{% endblock %}

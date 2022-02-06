@@ -1,0 +1,11 @@
+{% for message in app.flashes('success') %}
+	<div class="message-flash p-success">
+		<p>{{ message }} <i class="croix fas fa-times"></i></p>
+	</div>
+{% endfor %}
+
+{% for message in app.flashes('error') %}
+	<div class="message-flash p-error">
+		<p>{{ message }} <i class="croix fas fa-times"></i></p>
+	</div>
+{% endfor %}

@@ -17,6 +17,13 @@ class FindRideController extends AbstractController
         $this->roadTripRepository = $roadTripRepository;
     }
 
+    #[Route('/trajet', name:'ride_search')]
+    public function ride(){
+
+        return $this->render('ride/search.html.twig');
+
+    }
+
     #[Route('/trajet/search', name:'findRide_search')]
     public function searchRide(Request $request){
         // array pour stocker tout les trajet trouver
@@ -45,7 +52,7 @@ class FindRideController extends AbstractController
     public function findRide($data){
 
         $ride = $this->roadTripRepository->findBy( 
-            ['startingPlace' => $data->getStartingPlace(), 'endingPlace' => $data->getEndingPlace()]
+            ['startingPlace' => $data->getStartingPlace(), 'endingPlace' => $data->getEndingPlace(), 'tripDate' => $data->getTripDate()]
         );
         foreach($ride as $r):
         $r->getUser()->getSurname();

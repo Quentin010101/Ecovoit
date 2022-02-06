@@ -10,24 +10,53 @@
 	{% endif %}
 {% endblock %}
 
-{% block body %}
-	<h1>Vos trajet:</h1>
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset("css/showSearch.css") }}">
+{% endblock %}
 
-	{% if rides|length > 0 %}
-		{% for ride in rides %}
-			<div class="card">
-				<p>User {{ ride.user.name }}</p>
-				<p>Départ:
-					{{ ride.startingPlace }}
-					à:
-					{{ ride.startingTime|date('H:i') }}</p>
-				<p>Arrivée:
-					{{ ride.endingPlace }}
-					à:
-					{{ ride.endingTime|date('H:i') }}</p>
-			</div>
-		{% endfor %}
+
+{% block body %}
+{% if rides|length > 0 %}
+	<h1 class="h1">{{ rides[0].startingPlace }}
+		<i class="fas fa-arrow-right"></i>
+		{{ rides[0].endingPlace }}
+	</h1>
 	{% else %}
-		<p>Aucun trajet trouvé</p>
-	{% endif %}
+		<h1 class="h1">Aucun Trajet trouvé à cette date</h1>
+{% endif %}
+	<div class="container">
+		{% if rides|length > 0 %}
+			{% for ride in rides %}
+				<div class="ride-card">
+					<div class="conducteur-container p-row p-align-item">
+						<div class="avatar-container p-center">
+							<img src="{{ asset('asset/avatar/' ~ ride.user.preference.avatar ) }}" alt="avatar">
+						</div>
+						<div class="p-column p-justify-center">
+							<p>Conducteur:</p>
+							<span>{{ ride.user.name }}</span>
+						</div>
+					</div>
+					<div class="horaire-container">
+						<p>Départ:
+						</p>
+						<span>{{ ride.startingPlace }}</span>
+						<p>
+							à:
+						</p>
+						<span>{{ ride.startingTime|date('H:i') }}</span>
+						<p>Arrivée:</p>
+						<span>{{ ride.endingPlace }}</span>
+						<p>à:</p>
+						<span>{{ ride.endingTime|date('H:i') }}</span>
+					</div>
+					<div class="button-container">
+						<a class="button2" href="{{ path('show_ride', {'id': ride.id }) }}" target="_Blank">Voir ce trajet</a>
+					</div>
+				</div>
+			{% endfor %}
+		{% else %}
+			<p>Aucun trajet trouvé</p>
+		{% endif %}
+	</div>
 {% endblock %}

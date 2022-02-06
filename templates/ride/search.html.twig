@@ -4,18 +4,49 @@
 	Recherche de trajet
 {% endblock %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset("css/searchRide.css") }}">
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('js/api.js') }}"></script>
+{% endblock %}
+
+
 {% block body %}
-	<h1>Ou voulez vous aller ?</h1>
+	<h1 class="h1">Êtes vous pret à voyager ?</h1>
+	<div class="container">
+		{% if formView is defined %}
+			<h2>Ou voulez vous aller ?</h2>
+			{{ form_start(formView) }}
+			{{ form_errors(formView) }}
+			<div>
+				{{ form_row(formView.startingPlace) }}
+				<div class="menu">
+				</div>
+			</div>
+			<div>
+				{{ form_row(formView.endingPlace) }}
+				<div class="menu">
+				</div>
+			</div>
+			{{ form_rest(formView) }}
 
-	{{ form_start(formView) }}
-	{{ form_errors(formView) }}
-	{{ form_widget(formView) }}
-
-	<button type="submit">
-		<i class="fas fa-save"></i>
-        Enregistrer
-	</button>
-
-	{{ form_end(formView) }}
+			<button class="btn btn-success" type="submit">
+				<i class="fas fa-save"></i>
+				Enregistrer
+			</button>
+			{{ form_end(formView) }}
+		{% else %}
+		<div class="search-container p-row">
+			<div >
+				<a class="button4" href="{{ path('findRide_search') }}">Trouver un trajet</a>
+			</div>
+			<div >
+				<a class="button4" href="{{ path('postRide_search') }}">Poster un Trajet</a>
+			</div>		
+		</div>
+		{% endif %}
+	</div>
 
 {% endblock %}

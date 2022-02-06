@@ -21,7 +21,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\NotBlank(message:"* L'email doit être obligatoirement renseigner")]
-    #[Assert\Email(message:"* L'email renseigné n'est pas valid")]
+    #[Assert\Email(message:"* L'email renseigné n'est pas valide")]
     #[Assert\Length(max:50, maxMessage:"* L'email ne peux contenir que 50 caractères au maximum")]
     private $email;
 
@@ -42,7 +42,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank(message:"* Le nom doit être obligatoirement renseigner")]
     private $surname;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
+    #[ORM\Column(type: 'string', nullable: true)]
+    #[Assert\Length(min:10 , minMessage:"* Votre numero de telephone n'est pas valide")]
+    #[Assert\Length(max:10 , maxMessage:"* Votre numero de telephone n'est pas valide")]
+    #[Assert\Regex("/\d+/", message:"* Votre numero de telephone n'est pas valide")]
     private $phoneNumber;
 
     #[ORM\Column(type: 'date')]
@@ -54,9 +57,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: RoadTrip::class)]
     private $roadTrips;
 
+    #[ORM\OneToMany(mappedBy: 'driver', targetEntity: Reservation::class)]
+    private $reservations;
+
+    #[ORM\OneToMany(mappedBy: 'userSender', targetEntity: Message::class)]
+    private $messages;
+
     public function __construct()
     {
         $this->roadTrips = new ArrayCollection();
+        $this->reservations = new ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -153,12 +164,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPhoneNumber(): ?int
+    public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;
     }
 
-    public function setPhoneNumber(?int $phoneNumber): self
+    public function setPhoneNumber(?string $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
 
@@ -223,6 +234,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($roadTrip->getUser() === $this) {
                 $roadTrip->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setDriver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getDriver() === $this) {
+                $reservation->setDriver(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setUserSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getUserSender() === $this) {
+                $message->setUserSender(null);
             }
         }
 

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RoadTripRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RoadTripRepository::class)]
@@ -32,9 +34,6 @@ class RoadTrip
     private $endingTime;
 
     #[ORM\Column(type: 'datetime')]
-    private $tripDate;
-
-    #[ORM\Column(type: 'datetime')]
     private $postDate;
 
     #[ORM\Column(type: 'integer')]
@@ -42,6 +41,17 @@ class RoadTrip
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'roadTrips')]
     private $user;
+
+    #[ORM\OneToMany(mappedBy: 'roadTrip', targetEntity: Reservation::class)]
+    private $reservations;
+
+    #[ORM\Column(type: 'date')]
+    private $tripDate;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -120,18 +130,6 @@ class RoadTrip
         return $this;
     }
 
-    public function getTripDate(): ?\DateTimeInterface
-    {
-        return $this->tripDate;
-    }
-
-    public function setTripDate(\DateTimeInterface $tripDate): self
-    {
-        $this->tripDate = $tripDate;
-
-        return $this;
-    }
-
     public function getPostDate(): ?\DateTimeInterface
     {
         return $this->postDate;
@@ -164,6 +162,48 @@ class RoadTrip
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setRoadTrip($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getRoadTrip() === $this) {
+                $reservation->setRoadTrip(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTripDate(): ?\DateTimeInterface
+    {
+        return $this->tripDate;
+    }
+
+    public function setTripDate(\DateTimeInterface $tripDate): self
+    {
+        $this->tripDate = $tripDate;
 
         return $this;
     }

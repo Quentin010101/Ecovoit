@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\RoadTrip;
+use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -23,7 +24,8 @@ class SearchRideType extends AbstractType
                 'attr' => ['placeholder' => "Ou voulez vous aller?"]
             ])
             ->add('tripDate', DateType::class, [
-                'label' => 'Jour du départ'
+                'label' => 'Jour du départ',
+                'data' => new DateTime('now')
             ])
         ;
     }

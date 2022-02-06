@@ -1,20 +1,27 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Inscription
+	Inscription
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset("css/searchRide.css") }}">
 {% endblock %}
 
 {% block body %}
-    <h1>Incription</h1>
+	<h1 class="h1">Incription</h1>
+	<div class="container">
+		<h2>Formulaire d'inscription</h2>
+        
+		{{ form_start(formView)}}
+		{{ form_widget(formView)}}
+		{{ form_errors(formView)}}
 
-    {{ form_start(formView)}}
-    {{ form_widget(formView)}}
-    {{ form_errors(formView)}}
+		<button class="btn btn-success" type="submit">
+			<i class="fas fa-save"></i>
+			Enregistrer
+		</button>
 
-    <button type="submit">
-        <i class="fas fa-save"></i>
-        Enregistrer
-    </button>
-
-    {{ form_end(formView)}}
+		{{ form_end(formView)}}
+	</div>
 {% endblock %}

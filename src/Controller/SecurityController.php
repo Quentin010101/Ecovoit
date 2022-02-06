@@ -2,16 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
-use App\Form\InscriptionType;
-use App\Form\LoginType;
 use DateTime;
+use App\Entity\User;
+use App\Form\LoginType;
+use App\Entity\Preference;
+use App\Form\InscriptionType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class SecurityController extends AbstractController
 {
@@ -24,7 +25,9 @@ class SecurityController extends AbstractController
     #[Route('/login', name:'security_login')]
     public function login(AuthenticationUtils $authenticationUtils){
         $error = $authenticationUtils->getLastAuthenticationError();
-
+        if($error){
+            $this->addFlash('error', 'Les informations remplit ne sont pas valide.');
+        }
         $form = $this->createForm(LoginType::class);
         $formView = $form->createView();
 
@@ -37,6 +40,7 @@ class SecurityController extends AbstractController
     public function inscription(Request $request, EntityManagerInterface $em){
 
         $user = new User;
+        $preference = new Preference;
 
         $form = $this->createForm(InscriptionType::class);
 
@@ -47,11 +51,14 @@ class SecurityController extends AbstractController
             $user = $form->getData();
             // remplit user avec la date du jour
             $user->setDate(new DateTime('now'));
+            $user->setRoles('ROLE_USER');
             // encrypte password
             $password = $user->getPassword();
             $user->setPassword($this->encoder->hashPassword($user, $password));
+            $this->setDefaultPreference($preference, $user);
             // enregistrer les changement
             $em->persist($user);
+            $em->persist($preference);
             $em->flush();
 
             return $this->render('home.html.twig');
@@ -67,5 +74,15 @@ class SecurityController extends AbstractController
     #[Route('/logout', name:'security_logout')]
     public function logout(){
 
+    }
+
+    public function setDefaultPreference($preference, $user){
+        $preference->setUser($user);
+        $preference->setAvatar('default_avatar.png');
+        $preference->setPetAllowed(0);
+        $preference->setSmokingAllowed(0);
+        $preference->setMusic(2);
+        $preference->setTalking(2);
+        $preference->setTheme(0);
     }
 }

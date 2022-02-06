@@ -1,0 +1,162 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{% if roadTrip|length > 0 %}
+		{{ roadTrip.startingPlace}}
+		-
+		{{ roadTrip.endingPlace}}
+	{% else %}
+		Aucun Trajet
+	{% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset("css/showRide.css") }}">
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset("js/messagerie.js") }}"></script>
+{% endblock %}
+
+{% block body %}
+	<h1 class="h1">Trajet prévu le:
+		<span>{{ roadTrip.tripDate|date('d/m/Y') }}</span>
+	</h1>
+	<div class="container">
+		<div class="ride-card p-column p-align-center">
+			<h2 class="p-row p-align-center">
+				<span>{{ roadTrip.startingPlace}}</span>
+				<i class="fas fa-arrow-right"></i>
+				<span>{{ roadTrip.endingPlace}}</span>
+			</h2>
+			<div class="line"></div>
+			<div class="p-column trajet-container">
+				<div>
+					<h3>Distance:</h3>
+					<h4>{{ roadTrip.tripDistance }}
+						km</h4>
+				</div>
+				<div>
+					<h3>Temps de trajet:</h3>
+					<h4>{{ roadTrip.tripDuration }}</h4>
+				</div>
+				<div class="horaire-container">
+					<h3>Départ de:</h3>
+					<h4>{{ roadTrip.startingPlace }}</h4>
+					<h3>à:</h3>
+					<h4>{{ roadTrip.startingTime|date('H:m') }}</h4>
+					<h3>Arrivée à:</h3>
+					<h4>{{ roadTrip.endingPlace }}</h4>
+					<h3>à:</h3>
+					<h4>{{ roadTrip.endingTime|date('H:m') }}</h4>
+				</div>
+				<div>
+					<h3>Nombre de place réservé:</h3>
+					<h4>{{ reservation|length }}/{{ roadTrip.numberSeat }}</h4>
+				</div>
+				<div class="button-container">
+					<a class="button2" href="{{ path('book_ride', {'id': roadTrip.id }) }}">Réservé</a>
+				</div>
+				<div>
+					<h3>Conducteur:</h3>
+					<h4>{{ roadTrip.user.name}}</h4>
+					<h4>{{ roadTrip.user.surname}}</h4>
+					<div class="avatar-container p-center">
+						<img src="{{ asset('asset/avatar/' ~ roadTrip.user.preference.avatar ) }}" alt="avatar">
+					</div>
+					<div>
+						<div>
+							<h5>Annimaux de companie:</h5>
+							{% if roadTrip.user.preference.petAllowed == 0 %}
+								<h6>
+									<i class="fas fa-check-circle"></i>
+									Autorisé
+								</h6>
+							{% else %}
+								<h6>
+									<i class="fas fa-times-circle"></i>
+									Interdit</h6>
+							{% endif %}
+						</div>
+						<div>
+							<h5>Fumeur:</h5>
+							{% if roadTrip.user.preference.smokingAllowed == 0 %}
+								<h6>
+									<i class="fas fa-check-circle"></i>
+									Autorisé
+								</h6>
+							{% else %}
+								<h6>
+									<i class="fas fa-times-circle"></i>
+									Interdit</h6>
+							{% endif %}
+						</div>
+						<div>
+							<h5>Musique:</h5>
+							{% if roadTrip.user.preference.music == 0 %}
+								<h6>
+									<i class="fas fa-check"></i>
+									<i class="fas fa-check"></i>
+									<i class="fas fa-check"></i>
+									Voyage sans musique
+								</h6>
+							{% endif %}
+							{% if roadTrip.user.preference.music == 1 %}
+								<h6>
+									<i class="fas fa-check"></i>
+									<i class="fas fa-check"></i>
+									<i class="fas fa-check"></i>
+									Oui pendant une partit du trajet
+								</h6>
+							{% endif %}
+							{% if roadTrip.user.preference.music == 2 %}
+								<h6>
+									<i class="fas fa-check"></i>
+									<i class="fas fa-check"></i>
+									<i class="fas fa-check"></i>
+									Pendant tout le trajet</h6>
+							{% endif %}
+						</div>
+						<div>
+							<h5>Discution:</h5>
+							{% if roadTrip.user.preference.talking == 0 %}
+								<h6>
+									<i class="fas fa-check"></i>
+									<i class="fas fa-check"></i>
+									<i class="fas fa-check"></i>
+									Un peu
+								</h6>
+							{% endif %}
+							{% if roadTrip.user.preference.talking == 1 %}
+								<h6>
+									<i class="fas fa-check"></i>
+									<i class="fas fa-check"></i>
+									<i class="fas fa-check"></i>
+									Oui j'aime bien discuté
+								</h6>
+							{% endif %}
+							{% if roadTrip.user.preference.talking == 2 %}
+								<h6>
+									<i class="fas fa-check"></i>
+									<i class="fas fa-check"></i>
+									<i class="fas fa-check"></i>
+									Pendant tout le trajet</h6>
+							{% endif %}
+						</div>
+						{% if app.user %}
+						<div class="button-container">
+							<button class="button2 button-messagerie">Envoyé un message à ce conducteur</button>
+						</div>
+						{% else %}
+							<p>*Vous devez être connecté pour envoyé un message.</p>
+						{% endif %}
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% include "includes/_messagerie.html.twig" %}
+
+{% endblock %}

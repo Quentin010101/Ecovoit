@@ -1,0 +1,18 @@
+:root{
+
+    --font-1: 'Source Sans Pro', sans-serif;
+    --font-2: 'Lato', sans-serif;
+    --font-3: 'Murecho', sans-serif;
+    --font-4: 'Supermercado One';
+}
+
+
+h1, a{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+h2, label, input{
+    font-family: 'Lato', sans-serif;
+}
+h3, h4, h5, h6, p{
+    font-family: 'Murecho', sans-serif;
+}

@@ -1,0 +1,91 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Page Moderateur
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset("css/account.css") }}">
+{% endblock %}
+{% block javascripts %}
+	<script src="{{ asset("js/navigation-account.js") }}"></script>
+{% endblock %}
+
+{% block body %}
+	<div class="wrapper">
+		<h1 class="h1">Compte Moderateur</h1>
+		<div class="p-row">
+			<div class="navigation">
+				<div class="p-row p-justify-center">
+					<i class="fas fa-user-shield"></i>
+				</div>
+				<div class="p-column">
+					<button id="button-signalement" class="button3 button3-show">
+						<i class="fas fa-message"></i>
+						<span>Signalement</span>
+					</button>
+					<button id="button-bannissement" class="button3">
+						<i class="fas fa-ban"></i>
+						<span>bannissement</span>
+					</button>
+				</div>
+			</div>
+			<div class="p-container">
+				<section id="section-signalement" class="show-section">
+					<h2>Message reporté:</h2>
+					{% for m in messageReported %}
+					<hr>
+						<div>
+							<h4>Message signalé par:</h4>
+							<div class="p-row p-align-center img-cont">
+								<div class="avatar-container p-center">
+									<img src="{{ asset('asset/avatar/' ~ m.userReciever.preference.avatar ) }}" alt="avatar">
+								</div>
+								<span>{{ m.userReciever.name }}</span>
+							</div>
+							<h4>Personne signalé:</h4>
+							<div class="p-row p-align-center img-cont">
+								<div class="avatar-container p-center">
+									<img src="{{ asset('asset/avatar/' ~ m.userSender.preference.avatar ) }}" alt="avatar">
+								</div>
+								<div>
+									<p>{{ m.userSender.name }}</p>
+									{% if m.userSender in usersBan %}
+										<h5>
+											<i class="fas fa-check"></i>
+											Cette Utilisateur est bannis</h5>
+									{% else %}
+										<div class="button-container">
+											<a class="button1" href="{{ path('moderator_banUser', {'id': m.userSender.id } ) }}">Bannir cette utilisateur</a>
+										</div>
+									{% endif %}
+								</div>
+							</div>
+							<h4>Message:</h4>
+							<p>{{ m.messageContent }}</p>
+							<div class="button-container">
+								<a class="button2" href="{{ path('moderator_unReport', {'id': m.id }) }}">Annulé signalement</a>
+							</div>
+						</div>
+					{% endfor %}
+				</section>
+				<section id="section-bannissement" class="hide-section">
+					<h2>Utilisateur bannis</h2>
+					{% for b in usersBan %}
+						<div>
+							<hr>
+							<h3>Utilisateur:</h3>
+							<span>{{ b.name }}</span>
+							<div class="avatar-container p-center">
+								<img src="{{ asset('asset/avatar/' ~ b.preference.avatar ) }}" alt="avatar">
+							</div>
+							<div class="button-container">
+								<a class='button2' href="{{ path('moderator_unBanUser', {'id': b.id }) }}">Retirer le bannissement</a>
+							</div>
+						</div>
+					{% endfor %}
+				</section>
+			</div>
+		</div>
+	</div>
+{% endblock %}

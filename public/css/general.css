@@ -1,19 +1,137 @@
 *{
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
-
+html{
+    height: 100%;
+}
+body{
+    min-height: 100vh;
+    height: 100%;
+}
 a{
     text-decoration: none;
 }
 li{
     list-style: none;
 }
-.row{
+p{
+    margin-bottom: 0;
+}
+.p-row{
     display: flex;
     flex-direction: row;
 }
-.column{
+.p-align-center{
+    align-items: center;
+}
+.p-justify-center{
+    justify-content: center;
+}
+.p-column{
     display: flex;
     flex-direction: column;
+}
+.p-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*  dimension user avatar */
+.avatar-container{
+    height: 75px !important;
+    width: 75px !important;
+    min-width: 75px;
+    border-radius: 50%;
+    border: solid 5px var(--c-p-1);
+    overflow: hidden;
+}
+.avatar-container img{
+    width: 90%;
+    height: 90%;
+}
+
+/* Message Flash ----------------------------*/
+/* error */
+.p-error{
+    background-color: var(--c-r);
+}
+/* success */
+.p-success{
+    background-color: var(--c-g);
+}
+.message-flash{
+    z-index: 10;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px;
+    border-radius: 10px;
+    width: auto;
+    opacity: 1;
+}
+.message-flash i{
+    margin-left: 10px;
+    cursor: pointer;
+}
+.message-disappear{
+    opacity: 0;
+    transition: 3s;
+}
+.message-display{
+    display: none;
+}
+/* ------------------------------x-----------*/
+
+/*-------------Messagerie------------------*/
+#messagerie{
+    position: fixed;
+    display: none;
+    width: 500px;
+    bottom: 50px;
+    right: 50px;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: var(--c-b-2);
+    box-shadow: 5px 5px 10px var(--c-p-1);
+}
+#messagerie .croix-container{
+    text-align: right;
+}
+#messagerie #croix{
+    font-size: 1.8em;
+    color: var(--c-w-2);
+    cursor: pointer;
+}
+#messagerie h3{
+    font-weight: 400;
+}
+#messagerie h3 span{
+    color:var(--c-s-1);
+    font-weight: 600;
+}
+#messagerie textarea{
+    resize: none;
+}
+#messagerie label{
+    color:var(--c-w-5);
+}
+.messagerie-visible{
+    display: block !important;
+}
+
+@media (max-width: 700px) {
+    #messagerie{
+        position: fixed;
+        width: 100%;
+        bottom: 50px;
+        right: 0px;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: var(--c-b-2);
+        box-shadow: 5px 5px 10px var(--c-p-1);
+    } 
 }

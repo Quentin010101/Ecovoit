@@ -1,0 +1,68 @@
+.h1{
+    margin: 10px 0;
+    padding: 15px 0 15px 30px;
+    background-color: var(--c-p-2);
+    color: var(--c-w-2);
+    font-size: 1.3em;
+}
+h2{
+    font-size: 1.3em;
+    text-align: center;
+    margin: 10px;
+    font-family: var(--font-4);
+    color:var(--c-p-2);
+}
+.container{
+    margin: 40px auto;
+    padding: 40px;
+    box-shadow: 5px 5px 10px var(--c-p-2);
+    border-radius: 10px;
+}
+label, legend{
+    font-family: var(--font-2);
+    font-weight: 600;
+    color: var(--c-s-2);
+}
+.search-container{
+    justify-content: space-around;
+}
+.menu{
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+.menu #ul{
+    position: absolute;
+    top: -1rem;
+    left: 0;
+    background-color: white;
+    padding: 10px 0px;
+    width: 100%;
+    border: 1px solid grey;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 2px 2px 5px var(--c-p-2);
+}
+.menu #ul li{
+    cursor: pointer;
+    padding: 0 20px;
+}
+.menu #ul li:hover{
+    background-color: gray;
+    color: white;
+}
+
+
+@media (max-width: 800px) {
+    .input-group{
+        flex-direction: column;
+    }
+    .input-group> select{
+        width: 100% !important;
+    }
+    .search-container{
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+    }
+}

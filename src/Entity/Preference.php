@@ -13,7 +13,7 @@ class Preference
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255, options:['dafault_avatar.png'])]
+    #[ORM\Column(type: 'string', length: 255)]
     private $avatar;
 
     #[ORM\Column(type: 'boolean', options:[0])]
@@ -75,36 +75,36 @@ class Preference
         return $this;
     }
 
-    public function getMusic(): ?string
+    public function getMusic(): ?int
     {
         return $this->music;
     }
 
-    public function setMusic(string $music): self
+    public function setMusic(int $music): self
     {
         $this->music = $music;
 
         return $this;
     }
 
-    public function getTalking(): ?string
+    public function getTalking(): ?int
     {
         return $this->talking;
     }
 
-    public function setTalking(string $talking): self
+    public function setTalking(int $talking): self
     {
         $this->talking = $talking;
 
         return $this;
     }
 
-    public function getTheme(): ?string
+    public function getTheme(): ?bool
     {
         return $this->theme;
     }
 
-    public function setTheme(string $theme): self
+    public function setTheme(bool $theme): self
     {
         $this->theme = $theme;
 

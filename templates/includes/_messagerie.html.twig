@@ -1,0 +1,15 @@
+<div id="messagerie" class="p-column">
+    <div class="croix-container">
+        <i id="croix" class="fas fa-times"></i>
+    </div>
+	<h3>Destinataire:
+		<span>{{ roadTrip.user.name }}</span></h3>
+	{{ form_start(formView) }}
+	{{ form_errors(formView) }}
+	{{ form_widget(formView) }}
+	<button class="button2" type="submit">
+		<i class="fas fa-save"></i>
+		Envoyer
+	</button>
+	{{ form_end(formView) }}
+</div>

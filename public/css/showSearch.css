@@ -1,0 +1,51 @@
+.h1{
+    margin: 10px 0;
+    padding: 15px 0 15px 30px;
+    background-color: var(--c-p-2);
+    color: var(--c-w-2);
+    font-size: 1.3em;
+}
+.h1 i{
+    font-size: 0.8em;
+    margin: 0 20px;
+}
+.ride-card{
+    padding: 20px;
+    box-shadow: 5px 5px 10px var(--c-p-2);
+    border-radius: 10px;
+    margin: 15px 0;
+    background-image: radial-gradient(var(--c-s-3), var(--c-p-3));
+}
+.horaire-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: fit-content;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.horaire-container span{
+    margin: 0 5px;
+    font-size: 1.1em;
+    font-family: var(--font-4);
+    color:var(--c-w-2)
+}
+.horaire-container p{
+    font-weight: 600;
+    color: var(--c-b-4);
+}
+.conducteur-container{
+    gap: 15px;
+    margin-bottom: 15px;
+}
+.conducteur-container p{
+    font-family: var(--font-3);
+    font-size: 1.3em;
+    color: var(--c-w-4);
+    font-weight: 500;
+}
+.conducteur-container span{
+    font-family: var(--font-3);
+    font-size: 1.1em;
+    color: var(--c-b-4);
+    font-weight: 500;
+}
