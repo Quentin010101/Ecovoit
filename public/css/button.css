@@ -6,6 +6,7 @@
     transition: 0.5s;
     background-color: var(--c-w-10);
     font-family: var(--font-3);
+    font-size: 0.8em;
     font-weight: 600;
 }
 .button1:hover{
@@ -20,6 +21,7 @@
     border-radius: 5px;
     background-color: transparent;
     color: var(--c-g);
+    font-size: 0.8em;
     font-family: var(--font-3);
     font-weight: 600;
     transition: 0.5s;

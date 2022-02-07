@@ -1,3 +1,6 @@
+:root{
+    --height-h1: 35px;
+}
 body{
     overflow-x: hidden;
     font-size: 0.9em;
@@ -9,12 +12,15 @@ body{
     padding: 5px 0 5px 20px;
     font-size: 1.5em;
     border-radius: 10px;
+    height: var(--height-h1);
 }
 .wrapper{
-    height: calc(100vh - var(--footer-height) - var(--header-height));
+    height: calc(100vh - var(--footer-height) - var(--header-height) - 7px);
+    margin: 0;
+    padding: 0;
 }
 .wrapper > div{
-    height: 100%;
+    height: calc(100% - var(--height-h1) - 7px);
 }
 .navigation{
     z-index: 2;
@@ -55,13 +61,13 @@ section{
     position:absolute;
     left: 0;
     top: 0;
-    height: fit-content;
+    height: 100%;
     margin: 0 20px;
     background-color: var(--c-s-1);
     border-radius: 10px;
     box-shadow: 5px 5px 10px var(--c-b-6);
-    overflow: hidden;
     width: calc(100% - 40px);
+    overflow-y: scroll;
     padding: 40px;
     transition: transform 0.3s ease;
 }
