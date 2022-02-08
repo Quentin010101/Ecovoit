@@ -4,6 +4,79 @@
     Accueil
 {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/home-shadow.js') }}"></script>
+{% endblock %}
+
+{% block head %}
+    <div class="header-img">
+        <div class="image-header image-ciel">
+            <img src="{{ asset('asset/img/ciel.png') }}" alt="tree">
+        </div>
+        <div class="image-header image-stone">
+            <img src="{{ asset('asset/img/stone.png') }}" alt="tree">
+        </div>
+        <div class="image-header image-tree2">
+            <img src="{{ asset('asset/img/tree2.png') }}" alt="tree">
+        </div>
+        <div class="image-header image-car">
+            <img src="{{ asset('asset/img/car.png') }}" alt="car">   
+        </div>
+        <div class="image-header image-tree1">
+            <img src="{{ asset('asset/img/tree1.png') }}" alt="tree">
+        </div>
+        <div class="image-header image-car3">
+            <img src="{{ asset('asset/img/car3.png') }}" alt="tree">
+        </div>
+        <div class="image-header image-car4">
+            <img src="{{ asset('asset/img/car4.png') }}" alt="tree">
+            <div></div>
+        </div>
+    </div>
+{% endblock %}
+
 {% block body %}
     
+<div class="wrapper">
+    <section class="p-row">
+        <div class="container-img" >
+            <img src="{{ asset('asset/img/eco.png') }}" alt="ecologie">
+        </div>
+        <div class="container-text p-column p-justify-center shadowShow">
+            <h1>Un Moyen écologique de voyager</h1>
+            <hr>
+            <p>Lorem ipsum dolor sit amet consectetiquid! Laboriosam porro quos reiciendis atque explicabo eius incidunt labore. Maxime eum quis eius tempore perspiciatis, repudiandae et nesciunt earum est itaque reprehenderit error quod voluptatem quae fugiat praesentium quidem, expedita possimus tenetur corrupti optio.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, omnis?</p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro unde harum blanditiis eius aliquid veritatis vitae deleniti, necessitatibus ratione possimus eveniet dicta repudiandae itaque atque officia.</p>
+        </div>
+    </section>
+    <hr>
+    <section class="p-row">
+        <div class="container-text p-column p-justify-center">
+            <h1>Faite des éconnomies avec Ecovoit</h1>
+            <hr>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque possimus repellat suscipit a voluptatum, ipsa aliquid! Laboriosam porro quos reiciendis atque explicabo eius incidunt labore. Maxime eum quis eius tempore perspiciatis, repudiandae et nesciunt earum est itaque reprehenderit error quod voluptatem quae fugiat praesentium quidem, expedita possimus tenetur corrupti optio.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab ad id cum ex nostrum? Rerum quo perferendis culpa tempora ut, alias magni animi numquam necessitatibus fugit perspiciatis repellat fugiat unde est. Delectus, commodi esse?</p>
+        </div>
+        <div class="container-img" >
+            <img src="{{ asset('asset/img/money.png') }}" alt="money">
+        </div>
+    </section>
+    <hr>
+    <section class="p-row">
+        <div class="container-img" >
+            <img src="{{ asset('asset/img/exp3.png') }}" alt="money">
+        </div>
+        <div class="container-text p-column p-justify-center">
+            <h1>Plus q'un trajet une expérience de vie</h1>
+            <hr>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque possimus repellat suscipit a voluptatum, ipsa aliquid! Laboriosam porro quos reiciendis atque explicabo eius incidunt labore. Maxime eum quis eius tempore perspiciatis, repudiandae et nesciunt earum est itaque reprehenderit error quod voluptatem quae fugiat praesentium quidem, expedita possimus tenetur corrupti optio.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis distinctio dolor id aspernatur facere omnis neque itaque quam, cupiditate commodi libero doloremque maxime mollitia perspiciatis, nesciunt dignissimos?</p>
+        </div>
+    </section>
+</div>
 {% endblock %}

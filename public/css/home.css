@@ -1,0 +1,180 @@
+
+.wrapper{
+    margin: 0 2vw;
+}
+.header-img{
+    position: relative;
+    height: 150px;
+    overflow: hidden;
+}
+.header-img .image-car img{
+    animation: trajet 25s ease infinite;
+}
+.header-img .image-car3 img{
+    animation: trajet2 25s ease infinite;
+}
+.header-img .image-car4{
+    animation: trajet3 25s ease infinite;
+}  
+
+.image-car {
+    bottom: -35px;
+    z-index: 1;
+}
+.image-car4{
+    position: relative;
+    bottom: -32px;
+}
+.image-car4 img{
+    position: relative;
+    transform: scale(0.8);
+}
+.image-car4::before{
+    content: '';
+    top: 30px;
+    left: 95px;
+    position: absolute;
+    height: 10px;
+    width: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: red;
+    z-index: 1;
+    animation: giro 0.5s infinite;
+}
+@keyframes giro{
+    0%{ background-color: red;}
+    50%{ background-color: yellow;}
+    100%{ background-color: red;}
+}
+.image-car3{
+    left: 120px;
+    bottom: -25px;
+    transform: scale(0.9);
+}
+.image-header{
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}
+.image-header img{
+    height: 100%;
+}
+.image-tree1{
+    bottom: -10px;
+    left: 5vw;
+}
+.image-tree2{
+    bottom: -10px;
+    left: 80%;
+}
+.image-stone{
+    bottom: -60%;
+    left: 15%;
+    z-index: -1;
+}
+.image-ciel{
+    width: 100%;
+}
+.image-ciel img{
+    width: 100%;
+}
+.image-stone img{
+    width: 70%;
+    height: 60%;
+}
+@keyframes trajet{
+    0% { transform: translateX(-40vw); opacity:0}
+    32% { transform: translateX(-40vw); opacity:0}
+    33% { transform: translateX(-40vw); opacity:1}
+    37% {transform: translateX(5vw) rotateZ(2deg); }
+    42% {transform: translateX(15vw) rotateZ(-3deg); }
+    55% {transform: translateX(85vw) rotateZ(1deg); }
+    66% {transform: translateX(140vw); opacity:1}
+    67% {transform: translateX(140vw); opacity:0}
+    100% {transform: translateX(140vw); opacity:0}
+}
+@keyframes trajet2{
+    0% { transform: translateX(140vw); opacity:0;}
+    1% { transform: translateX(140vw); opacity:1;}
+    8% {transform: translateX(85vw) rotateZ(3deg); opacity:1;}
+    18% {transform: translateX(35vw) rotateZ(-2deg); opacity:1;}
+    26% {transform: translateX(15vw) rotateZ(1deg); opacity:1;}
+    33% {transform: translateX(-80vw); opacity:1;}
+    34% {transform: translateX(-80vw); opacity:0;}
+    100% {transform: translateX(-80vw); opacity:0;}
+}
+@keyframes trajet3{
+    0% { transform: translateX(140vw); }
+    66% { transform: translateX(140vw); }
+    70% {transform: translateX(75vw) rotateZ(1deg); }
+    80% {transform: translateX(25vw) rotateZ(-1deg); }
+    90% {transform: translateX(10vw) rotateZ(1deg); }
+    100% {transform: translateX(-40vw); }
+}
+section{
+    padding: 3vw;
+    width: 100%;
+}
+hr{
+    width: 80%;
+    margin: 0 auto;
+}
+h1{
+    font-family: var(--font-4);
+    color: var(--c-s-3);
+    text-align: center;
+}
+p{
+    font-family: var(--font-3);
+    color: var(--c-b-3);
+    text-align: center;
+}
+.container-img{
+    width: 35%;
+    aspect-ratio: 1/1;
+}
+.container-img img{
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+}
+.container-text{
+    padding: 20px 50px;
+    gap: 25px;
+    width: 65%;
+    transition: all 1s;
+    border-radius: 10px;
+}
+.shadowShow{
+    box-shadow: 3px 3px 15px 5px var(--c-p-7);
+    background-color: var(--c-s-9);
+    transition: all 1s;
+}
+
+
+/*----------Media Querie ----------*/
+@media (max-width: 700px){
+    section{
+        display: flex;
+        flex-direction: column !important;
+        align-items: center;
+    }
+    .container-img{
+        width: 60%;
+    }
+    .container-text{
+        width: 100%;
+        padding: 20px 40px;
+    }
+    .image-stone{
+        left: 40%;
+        bottom: -60%;
+    }
+}
+@media (max-width: 500px){
+    .container-text{
+        padding: 10px 20px;
+    }
+}
+

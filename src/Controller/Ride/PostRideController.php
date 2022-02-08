@@ -2,6 +2,7 @@
 
 namespace App\Controller\Ride;
 
+use App\Entity\RoadTrip;
 use App\Form\PostRideType;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,19 +18,20 @@ class PostRideController extends AbstractController
     public function postRide(Request $request, Security $security, EntityManagerInterface $em){
 
         $user = $security->getUser();
+        $roadtrip = new RoadTrip;
 
         $form = $this->createForm(PostRideType::class);
 
         $form->handleRequest($request);
         if($user){
             if($form->isSubmitted() && $form->isValid()){
-                /** @var RoadTrip */
+
                 $roadtrip = $form->getData();
                 $roadtrip->setPostDate(new DateTime('now'));
                 // set ending time
-                $date = $roadtrip->getStartingTime();
+                $date = clone $roadtrip->getStartingTime();
                 $duration = $roadtrip->getTripDuration();
-                $date->modify("+$duration seconde");
+                $date->modify("+ $duration seconde");
                 $roadtrip->setEndingTime($date);
                 $roadtrip->setUser($user);
     

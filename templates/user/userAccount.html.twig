@@ -107,7 +107,11 @@
 								<p>
 									{{ (ride[0].tripDistance)/1000 }}km
 									<i class="fas fa-arrow-right"></i>
-									{{ (ride[0].tripDuration) }}min
+									{% set difference = date(ride[0].startingTime).diff(ride[0].endingTime) %}
+									{% set leftHours = difference.h %}
+									{% set leftMin = difference.m %}
+									{% set leftSec = difference.s %}
+									{{ leftHours }} {{ leftMin }} {{ leftSec }}min
 								</p>
 							</div>
 						{% endfor %}

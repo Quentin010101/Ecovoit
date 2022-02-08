@@ -10,6 +10,9 @@ header{
     color: var(--c-w-4);
 
 }
+header p{
+    color: var(--c-w-2);
+}
 header .log{
     height: inherit;
     margin: 0 10px 0 auto;
